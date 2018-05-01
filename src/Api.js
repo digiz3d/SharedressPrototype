@@ -35,6 +35,7 @@ var clothes = [
     new Cloth(2,"robe rouge 2", "https://www.lamodeuse.com/173009-thickbox_default/robe-bordeaux-en-suedine-avec-fermeture-eclaire.jpg"),
     new Cloth(3,"robe bleu 1", "https://www.tendances-de-mode.com/images/upload/1469818359.jpg"),
     new Cloth(4,"robe bleu 2", "http://www.robeforyou.com/wp-content/uploads/2017/09/Robe-Asos-mariage-dentelle-bleu-nuit-BCBG-Max-Azria-l-La-Fiancee-du-Panda-blog-mariage.jpg"),
+    /*
     new Cloth(5,"robe verte 1", "https://i.pinimg.com/originals/2d/bd/da/2dbdda7b17437bd47be7450aaf397b78.jpg"),
     new Cloth(6,"robe verte 2", "http://www.cestmarobe.com/896-product/louer-robe-msgm-longue-one-shoulder-location.jpg"),
     new Cloth(7,"Pullover bleu 1", "http://blzjeans.com/32357-118767-thickbox/pullover-homme-bleu-navy-maille-col-montant-deeluxe-74.jpg"),
@@ -51,6 +52,7 @@ var clothes = [
     new Cloth(18,"Pantalon 2","https://i2.cdscdn.com/pdt2/8/1/9/1/700x700/mp08121819/rw/pantalon-jeans-femme-taille-basse-stretch-top-jean.jpg"),
     new Cloth(19,"Manteau","https://static.monshowroom.com/img-collection/3/5/6/4/7/1/356471-01-e.jpg"),
     new Cloth(20,"Trench","https://cdn.lookastic.com/trench-rouge/coat-kent-double-breasted-skirted-trench-original-188329.jpg"),
+    */
 ];
 
 class Api {

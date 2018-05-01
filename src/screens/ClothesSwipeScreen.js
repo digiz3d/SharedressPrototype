@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, Picker, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 import CustomStatusBar from '../components/CustomStatusBar';
 import ClothCardComponent from "../components/ClothCardComponent";
@@ -8,7 +8,6 @@ import TopMenuComponent from "../components/TopMenuComponent";
 import api from "../Api";
 import strings from "../Language";
 
-
 export default class ClothesSwipeScreen extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +15,8 @@ export default class ClothesSwipeScreen extends Component {
             nextItemsLoaded: false,
             set: [],
             finished: false,
+            almostFinished: false,
+            budget: "-"
         };
 
         this.firstCardRef = null;
@@ -42,12 +43,13 @@ export default class ClothesSwipeScreen extends Component {
         });
 
         api.getNextSet().then((val) => {
-            this.setState({ set: val,
+            this.setState({
+                set: val,
                 nextItemsLoaded: true,
                 finished: false,
             });
         }).catch((reason) => {
-            this.setState({ finished: true });
+            this.setState({ almostFinished: true });
         });
     }
 
@@ -66,6 +68,7 @@ export default class ClothesSwipeScreen extends Component {
         }
         //console.warn("AFTER locked second card");
     }
+
 
     renderSwipeUpComponents() {
         return (
@@ -90,29 +93,91 @@ export default class ClothesSwipeScreen extends Component {
         );
     }
 
-    render() {
-        if (this.state.finished) {
-            return (
-                <View style={styles.fullPage}>
-                    <CustomStatusBar color="white"/>
-                    <SafeAreaView style={styles.top}>
-                        <TopMenuComponent text={strings.titleSwipe} />
-                    </SafeAreaView>
-                    <SafeAreaView style={styles.finished}>
-                        <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
+    setBudget = () => {
+        this.setState({
+            finished: true,
+            almostFinished: false,
+        });
+    }
+
+    renderBudgetPicker() {
+        let pickers = [];
+        /*
+        for (let i = 0; i < MAX_AGE; i=i+50) {
+            pickers.push(<Picker.Item key={"Pickeritem-"+i.toString()} label={i.toString()} value={i.toString()} />);
+        }
+        */
+        pickers.push(<Picker.Item key={"Pickeritem-1"} label={"-"} value={"-"} />);
+        pickers.push(<Picker.Item key={"Pickeritem-2"} label={"< à 100"} value={"-100"} />);
+        pickers.push(<Picker.Item key={"Pickeritem-3"} label={"100 à 300"} value={"100-300"} />);
+        pickers.push(<Picker.Item key={"Pickeritem-4"} label={"300 à 500"} value={"300-500"} />);
+        pickers.push(<Picker.Item key={"Pickeritem-5"} label={"500 à 1000"} value={"500-1000"} />);
+        pickers.push(<Picker.Item key={"Pickeritem-6"} label={"> à 1000"} value={"1000+"} />);
+
+        return (
+            <Picker
+                mode="dropdown"
+                selectedValue={this.state.budget}
+                onValueChange={
+                    (itemValue, itemIndex) => {
+                        this.setState({ budget: itemValue })
+                    }} >
+                {pickers}
+            </Picker>
+        )
+    }
+
+    renderAlmostFinished() {
+        return (
+            <View style={styles.fullPage}>
+                <CustomStatusBar color="white" />
+                <SafeAreaView style={styles.top}>
+                    <TopMenuComponent text={strings.titleSwipe} />
+                </SafeAreaView>
+                <SafeAreaView style={styles.finished}>
+                    <Text style={styles.title}>Prototype signup parameters</Text>
+                    <View style={styles.form}>
+                        {this.renderBudgetPicker()}
                         <Button
-                            title="Recommencer"
-                            onPress={this.restartApi}
+                            onPress={this.setBudget}
+                            title={strings.submit}
                         />
-                    </SafeAreaView>
-                </View>
-            );
+                    </View>
+                </SafeAreaView>
+            </View>
+        );
+    }
+
+    renderFinish() {
+        return (
+            <View style={styles.fullPage}>
+                <CustomStatusBar color="white" />
+                <SafeAreaView style={styles.top}>
+                    <TopMenuComponent text={strings.titleSwipe} />
+                </SafeAreaView>
+                <SafeAreaView style={styles.finished}>
+                    <Text style={styles.finishedText}>Fini ! à la prochaine. 😉</Text>
+                    <Button
+                        title="Recommencer"
+                        onPress={this.restartApi}
+                    />
+                </SafeAreaView>
+            </View>
+        );
+    }
+
+    render() {
+        if (this.state.almostFinished) {
+            return this.renderAlmostFinished();
+        }
+        if (this.state.finished) {
+            return this.renderFinish();
         }
 
         if (!this.state.nextItemsLoaded) {
             return (
                 <View style={styles.fullPage}>
-                    <CustomStatusBar color="white"/>
+                    <CustomStatusBar color="white" />
                     <SafeAreaView style={styles.top}>
                         <TopMenuComponent text={strings.titleSwipe} />
                     </SafeAreaView>
@@ -170,5 +235,12 @@ const styles = StyleSheet.create({
     finishedText: {
         textAlign: "center",
         marginBottom: 20,
+    },
+    title: {
+        fontSize: 30,
+    },
+    form: {
+        width: "100%",
+        paddingHorizontal: 10,
     },
 });

@@ -90,9 +90,9 @@ export default class SignupParametersScreen extends Component {
                 </SafeAreaView>
                 <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
-                        onPress={this.goToLogin}
-                        question={strings.signupalready}
-                        answer={strings.answerLogin}
+                        onPress={this.goBack}
+                        question={strings.signUpAlready}
+                        answer={strings.login}
                     />
                 </SafeAreaView>
             </View>
@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
     },
     title : {
         fontSize: 30,
+        textAlign: "center",
     },
     bottomMenu: {
         zIndex: 2,

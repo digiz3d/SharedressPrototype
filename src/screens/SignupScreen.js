@@ -14,22 +14,6 @@ export default class SignupScreen extends Component {
         this.state = { email: '', password: '', loading: false };
     }
 
-    componentWillMount() {
-        // TODO: implement a real token verification and redirect to App if it is valid
-        this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.props.navigation.navigate("Signup2");
-            }
-            else {
-                this.setState({loading: false});
-            }
-        });
-    }
-
-    componentWillUnmount() {
-        this.authSubscription();
-    }
-
     goBack = () => {
         this.props.navigation.goBack();
     }
@@ -42,17 +26,22 @@ export default class SignupScreen extends Component {
         if (password == password2) {
         firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
             .then((user) => {
+                if (user) {
+                    this.props.navigation.navigate("Signup2");
+                }
+                else {
+                    this.setState({ loading: false });
+                }
                 // If you need to do anything with the user, do it here
                 // The user will be logged in automatically by the
                 // `onAuthStateChanged` listener we set up in App.js earlier
-                //console.warn('inscription ok');
             })
             .catch((error) => {
-                const { code, message } = error;
+                console.warn(error);
+                this.setState({ loading: false });
                 // For details of error codes, see the docs
                 // The message contains the default Firebase string
                 // representation of the error
-                //console.warn('erreur dinscription');
             });
         }
     }

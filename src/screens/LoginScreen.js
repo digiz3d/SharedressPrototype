@@ -45,22 +45,6 @@ export default class LoginScreen extends Component {
         this.state = { email: '', password: '', loading: false };
     }
 
-    componentWillMount() {
-        // TODO: implement a real token verification and redirect to App if it is valid
-        this.authSubscription = firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                this.props.navigation.navigate("App");
-            }
-            else {
-                this.setState({ loading: false });
-            }
-        });
-    }
-
-    componentWillUnmount() {
-        this.authSubscription();
-    }
-
     gotoSignup = () => {
         this.props.navigation.navigate("Signup");
     }
@@ -70,6 +54,12 @@ export default class LoginScreen extends Component {
         const { email, password } = this.state;
         if (email !== "" && password !== "") {
             firebase.auth().signInAndRetrieveDataWithEmailAndPassword(email, password).then((user) => {
+                if (user) {
+                    this.props.navigation.navigate("App");
+                }
+                else {
+                    this.setState({ loading: false });
+                }
             }).catch((error) => {
                 console.warn(error);
                 this.setState({ loading: false });

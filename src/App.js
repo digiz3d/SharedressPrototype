@@ -3,9 +3,11 @@ import { Platform, Text, View } from 'react-native';
 import { TabNavigator, StackNavigator, SwitchNavigator } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import AuthLoadingScreen from './screens/AuthLoadingScreen';
+
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import SignupParametersScreen from './screens/SignupParametersScreen';
+import ResetPasswordScreen from './screens/ResetPasswordScreen';
 
 import ClothesSwipeScreen from './screens/ClothesSwipeScreen';
 import SettingsScreen from './screens/SettingsScreen';
@@ -25,9 +27,9 @@ function routeNameToIcon(routeName) {
 // TODO: add a settings screen
 const AppTab = TabNavigator(
     {
-        Swipe: ClothesSwipeScreen,
-        Vouchers: VouchersScreen,
-        Settings: SettingsScreen,
+        Swipe: { screen: ClothesSwipeScreen },
+        Vouchers: { screen: VouchersScreen },
+        Settings: { screen: SettingsScreen },
     },
     {
         navigationOptions: ({ navigation }) => ({
@@ -52,9 +54,10 @@ const AppTab = TabNavigator(
 // TODO: add a sign-up screen
 const AuthTab = StackNavigator(
     {
-        Login: LoginScreen,
-        Signup: SignupScreen,
-        Signup2: SignupParametersScreen,
+        Login: { screen: LoginScreen },
+        Signup: { screen: SignupScreen },
+        Signup2: { screen: SignupParametersScreen },
+        ResetPassword: { screen: ResetPasswordScreen },
     },
     {
         headerMode: 'none', // we don't want a blank header
@@ -62,9 +65,9 @@ const AuthTab = StackNavigator(
 
 export default SwitchNavigator(
     {
-        AuthLoading: AuthLoadingScreen,
-        App: AppTab,
-        Auth: AuthTab,
+        AuthLoading: { screen: AuthLoadingScreen },
+        App: { screen: AppTab },
+        Auth: { screen: AuthTab },
     },
     {
         initialRouteName: 'AuthLoading',

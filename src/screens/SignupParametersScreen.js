@@ -18,10 +18,6 @@ export default class SignupParametersScreen extends Component {
         };
     }
 
-    onSelectAgeAndSex = () => {
-
-    }
-
     goToLogin = () => {
         this.props.navigation.navigate("Login");
     }
@@ -128,16 +124,5 @@ const styles = StyleSheet.create({
     form : {
         width: "100%",
         paddingHorizontal: 10,
-    },
-    textInput: {
-        backgroundColor: "white",
-        width: "100%",
-        borderWidth: 0,
-        borderRadius: 5,
-        borderColor: "silver",
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-        height: 40,
     },
 });

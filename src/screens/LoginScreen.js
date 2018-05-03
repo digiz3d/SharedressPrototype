@@ -45,6 +45,9 @@ export default class LoginScreen extends Component {
         this.state = { email: '', password: '', loading: false };
     }
 
+    goToResetPassword = () => {
+        this.props.navigation.navigate("ResetPassword")
+    }
     gotoSignup = () => {
         this.props.navigation.navigate("Signup");
     }
@@ -66,7 +69,7 @@ export default class LoginScreen extends Component {
             });
         }
         else {
-            this.setState({loading: false});
+            this.setState({ loading: false });
         }
     }
 
@@ -88,10 +91,18 @@ export default class LoginScreen extends Component {
                         <TextInput
                             placeholder={strings.password}
                             onChangeText={(txt) => { this.setState({ password: txt }) }}
-                            style={styles.textInput}
+                            style={[styles.textInput,{marginBottom: 0}]}
                             underlineColorAndroid="transparent"
                             secureTextEntry
                         />
+                        <TouchableHighlight
+                            onPress={this.goToResetPassword}
+                            activeOpacity={0.6}
+                            underlayColor="transparent"
+                            style={styles.forgotPassword}
+                        >
+                            <Text style={styles.forgotPasswordText}>{strings.forgotPassword}</Text>
+                        </TouchableHighlight>
                         <View style={styles.loginButton}>
                             <Button
                                 onPress={this.login}
@@ -111,7 +122,7 @@ export default class LoginScreen extends Component {
                                 catch (err) {
                                     console.warn(err);
                                 }
-                            }} title="Login with facebook" />
+                            }} title={strings.loginWithFacebook} />
                         </View>
                     </View>
                 </SafeAreaView>
@@ -168,7 +179,15 @@ const styles = StyleSheet.create({
     },
     loginButton: {
         height: 40,
-        marginBottom: 10,
+    },
+    forgotPassword: {
+        //backgroundColor: "orange",
+        alignSelf: 'flex-end',
+        height: 30,
+        justifyContent: 'center'
+    },
+    forgotPasswordText: {
+        fontSize: 11
     },
     fbSeparator: {
         //backgroundColor: "red",

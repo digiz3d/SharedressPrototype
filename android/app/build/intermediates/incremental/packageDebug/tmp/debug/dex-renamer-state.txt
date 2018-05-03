@@ -1,4 +1,4 @@
-#Wed May 02 18:40:58 CEST 2018
+#Thu May 03 19:42:40 CEST 2018
 base.0=C\:\\Users\\leand\\Desktop\\SharedressApp\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

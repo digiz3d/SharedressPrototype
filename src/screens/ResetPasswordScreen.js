@@ -95,8 +95,8 @@ export default class ResetPasswordScreen extends Component {
                 <SafeAreaView style={styles.bottomMenu}>
                     <BottomMenuComponent
                         onPress={this.goBack}
-                        question={strings.neverMind}
-                        answer={strings.gotIt}
+                        question={this.state.success ? strings.nowYouCanConnect : strings.neverMind}
+                        answer={this.state.success ? strings.withNewPassword : strings.gotIt}
                     />
                 </SafeAreaView>
             </View>

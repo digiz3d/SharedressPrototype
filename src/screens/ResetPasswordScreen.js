@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Animated, ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
 import CustomStatusBar from '../components/CustomStatusBar';
@@ -13,7 +13,14 @@ import firebase from 'react-native-firebase';
 export default class ResetPasswordScreen extends Component {
     constructor(props) {
         super(props);
-        this.state = { email: ''};
+        this.state = {
+            email: '',
+            message: '',
+            messageBoxHidden: true,
+            messageBoxHeight: new Animated.Value(0),
+            messageBoxOpacity: new Animated.Value(0),
+            sucess: false
+        };
     }
 
     goBack = () => {
@@ -21,11 +28,40 @@ export default class ResetPasswordScreen extends Component {
     }
 
     resetPassword = () => {
-        firebase.auth().sendPasswordResetEmail(this.state.email).then(function() {
-            console.warn('on a bien envoyé le mail de reset');
-          }).catch(function(error) {
-            console.warn(error);
-          });
+        const email = this.state.email.trim();
+        if (email !== "") {
+            firebase.auth().sendPasswordResetEmail(email).then(() => {
+                this.displayMessage(strings.resetPasswordEmailSent, true);
+            }).catch((err) => {
+                const { code, message } = err;
+                this.displayMessage(code);
+            });
+        }
+        else {
+            this.displayMessage(strings.pleaseEnterValidEmail);
+        }
+    }
+
+    displayMessage(message, success = false) {
+        if (this.state.messageBoxHidden) {
+            Animated.parallel([
+                Animated.timing(
+                    this.state.messageBoxHeight,
+                    {
+                        toValue: 40,
+                        duration: 200
+                    }
+                ),
+                Animated.timing(
+                    this.state.messageBoxOpacity,
+                    {
+                        toValue: 1,
+                        duration: 200
+                    }
+                )
+            ]).start();
+        }
+        this.setState({ message, messageBoxHidden: false, success });
     }
 
     render() {
@@ -43,8 +79,16 @@ export default class ResetPasswordScreen extends Component {
                             style={styles.textInput}
                             underlineColorAndroid="transparent"
                         />
+                        <Animated.View style={{
+                            opacity: this.state.messageBoxOpacity,
+                            height: this.state.messageBoxHeight,
+                            marginBottom: 10,
+                            justifyContent: 'center'
+                        }}>
+                            <Text>{this.state.message}</Text>
+                        </Animated.View>
                         <View style={styles.resetButton}>
-                            <Button onPress={this.resetPassword} title={strings.resetMyPassword} />
+                            <Button onPress={this.resetPassword} title={strings.resetMyPassword} disabled={this.state.success} />
                         </View>
                     </View>
                 </SafeAreaView>

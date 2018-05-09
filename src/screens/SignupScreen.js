@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import firebase from 'react-native-firebase';
 
 import CustomStatusBar from '../components/CustomStatusBar';
@@ -48,7 +48,7 @@ export default class SignupScreen extends Component {
 
     render() {
         return (
-            <View style={styles.fullPage}>
+            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup</Text>
@@ -88,7 +88,7 @@ export default class SignupScreen extends Component {
                         answer={strings.login}
                     />
                 </SafeAreaView>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Button, Picker, Text, SafeAreaView, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
@@ -71,7 +71,7 @@ export default class SignupParametersScreen extends Component {
     
     render() {
         return (
-            <View style={styles.fullPage}>
+            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup parameters</Text>
@@ -91,7 +91,7 @@ export default class SignupParametersScreen extends Component {
                         answer={strings.login}
                     />
                 </SafeAreaView>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

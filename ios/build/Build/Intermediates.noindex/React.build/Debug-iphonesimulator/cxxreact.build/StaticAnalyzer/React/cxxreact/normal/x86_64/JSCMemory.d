@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/test/Desktop/SharedressApp/node_modules/react-native/ReactCommon/cxxreact/JSCMemory.cpp \
-  /Users/test/Desktop/SharedressApp/node_modules/react-native/ReactCommon/cxxreact/JSCMemory.h \
-  /Users/test/Desktop/SharedressApp/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
-  /Users/test/Desktop/SharedressApp/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h
+  /Users/trishabindah/Desktop/SharedressApp/node_modules/react-native/ReactCommon/cxxreact/JSCMemory.cpp \
+  /Users/trishabindah/Desktop/SharedressApp/node_modules/react-native/ReactCommon/cxxreact/JSCMemory.h \
+  /Users/trishabindah/Desktop/SharedressApp/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/trishabindah/Desktop/SharedressApp/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h

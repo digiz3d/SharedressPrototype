@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
 import CustomStatusBar from '../components/CustomStatusBar';
@@ -75,7 +75,7 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <View style={styles.fullPage}>
+            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype login</Text>
@@ -133,7 +133,7 @@ export default class LoginScreen extends Component {
                         answer={strings.signUp}
                     />
                 </SafeAreaView>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }

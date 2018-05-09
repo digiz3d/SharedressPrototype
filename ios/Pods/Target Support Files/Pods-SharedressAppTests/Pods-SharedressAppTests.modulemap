@@ -1,0 +1,6 @@
+framework module Pods_SharedressAppTests {
+  umbrella header "Pods-SharedressAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

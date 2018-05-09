@@ -1,0 +1,6 @@
+framework module Pods_SharedressApp {
+  umbrella header "Pods-SharedressApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

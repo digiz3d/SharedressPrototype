@@ -9,7 +9,7 @@ import api from "../Api";
 import strings from "../Language";
 import firebase from 'react-native-firebase';
 
-const facebookLogin = async () => {
+const facebookLogin = async (onSuccess) => {
     try {
         const result = await LoginManager.logInWithReadPermissions(['public_profile', 'email']);
 
@@ -32,7 +32,8 @@ const facebookLogin = async () => {
         // login with credential
         const currentUser = await firebase.auth().signInAndRetrieveDataWithCredential(credential);
 
-        console.info(JSON.stringify(currentUser.user.toJSON()))
+        console.info(JSON.stringify(currentUser.user.toJSON()));
+        onSuccess();
     } catch (e) {
         console.error(e);
     }
@@ -117,7 +118,9 @@ export default class LoginScreen extends Component {
                         <View style={styles.loginButton}>
                             <Button onPress={() => {
                                 try {
-                                    facebookLogin();
+                                    facebookLogin(() => {
+                                        this.props.navigation.navigate("App");
+                                    });
                                 }
                                 catch (err) {
                                     console.warn(err);

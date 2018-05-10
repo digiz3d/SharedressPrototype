@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
+import CustomKeyboardAvoidingView from '../components/CustomKeyboardAvoidingView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
@@ -76,7 +77,7 @@ export default class LoginScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
+            <CustomKeyboardAvoidingView style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype login</Text>
@@ -136,7 +137,7 @@ export default class LoginScreen extends Component {
                         answer={strings.signUp}
                     />
                 </SafeAreaView>
-            </KeyboardAvoidingView>
+            </CustomKeyboardAvoidingView>
         );
     }
 }

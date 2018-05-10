@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Animated, ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { Animated, ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 
+import CustomKeyboardAvoidingView from '../components/CustomKeyboardAvoidingView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 
@@ -66,7 +67,7 @@ export default class ResetPasswordScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
+            <CustomKeyboardAvoidingView style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype reset password</Text>
@@ -99,7 +100,7 @@ export default class ResetPasswordScreen extends Component {
                         answer={this.state.success ? strings.withNewPassword : strings.gotIt}
                     />
                 </SafeAreaView>
-            </KeyboardAvoidingView>
+            </CustomKeyboardAvoidingView>
         );
     }
 }

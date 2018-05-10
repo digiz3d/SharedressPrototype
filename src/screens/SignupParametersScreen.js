@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Picker, Text, SafeAreaView, StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import { Button, Picker, Text, SafeAreaView, StyleSheet, View } from 'react-native';
 
+import CustomKeyboardAvoidingView from '../components/CustomKeyboardAvoidingView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
@@ -71,7 +72,7 @@ export default class SignupParametersScreen extends Component {
     
     render() {
         return (
-            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
+            <CustomKeyboardAvoidingView style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup parameters</Text>
@@ -91,7 +92,7 @@ export default class SignupParametersScreen extends Component {
                         answer={strings.login}
                     />
                 </SafeAreaView>
-            </KeyboardAvoidingView>
+            </CustomKeyboardAvoidingView>
         );
     }
 }

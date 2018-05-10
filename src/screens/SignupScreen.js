@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import { ActivityIndicator, Button, TextInput, TouchableHighlight, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import firebase from 'react-native-firebase';
 
+import CustomKeyboardAvoidingView from '../components/CustomKeyboardAvoidingView';
 import CustomStatusBar from '../components/CustomStatusBar';
 import BottomMenuComponent from "../components/BottomMenuComponent";
 import api from "../Api";
@@ -48,7 +49,7 @@ export default class SignupScreen extends Component {
 
     render() {
         return (
-            <KeyboardAvoidingView style={styles.fullPage} enabled behavior="padding">
+            <CustomKeyboardAvoidingView style={styles.fullPage}>
                 <CustomStatusBar />
                 <SafeAreaView style={styles.registerBackground}>
                     <Text style={styles.title}>Prototype signup</Text>
@@ -88,7 +89,7 @@ export default class SignupScreen extends Component {
                         answer={strings.login}
                     />
                 </SafeAreaView>
-            </KeyboardAvoidingView>
+            </CustomKeyboardAvoidingView>
         );
     }
 }
